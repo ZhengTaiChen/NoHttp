@@ -17,6 +17,7 @@ package com.yanzhenjie.nohttp.sample.behavior;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.Toolbar;
@@ -98,7 +99,9 @@ public class AvatarImageBehavior extends CoordinatorLayout.Behavior<CircleImageV
 
     private void maybeInitProperties(CircleImageView child, View dependency) {
         if (mStartYPosition == 0)
-            mStartYPosition = (int) (dependency.getY());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                mStartYPosition = (int) (dependency.getY());
+            }
 
         if (mFinalYPosition == 0)
             mFinalYPosition = (dependency.getHeight() / 2);
